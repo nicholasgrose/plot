@@ -1,0 +1,30 @@
+- name: check if update script exists
+  stat:
+    path: /root/scripts/update_cert.sh
+  register: cert_script
+
+- name: setup tailscale cert renewal
+  block:
+    - name: install script dependencies
+      apt:
+        name:
+          - jq
+    - name: save update script
+      copy:
+        src: "../templates/update_cert.sh"
+        dest: "/root/scripts/update_cert.sh"
+        owner: root
+        group: root
+        mode: 0755
+    - name: add cron job
+      cron:
+        name: "update tailscale cert"
+        minute: "0"
+        hour: "*/12"
+        job: "/root/scripts/update_cert.sh"
+        user: root
+    - name: run update cert script
+      shell:
+        cmd: "/root/scripts/update_cert.sh"
+        chdir: "/root"
+  when: not cert_script.stat.exists

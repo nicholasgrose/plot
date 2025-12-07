@@ -1,0 +1,10 @@
+- hosts: all
+  vars_files:
+    - vars/secrets.yml
+  roles:
+    - tailscale
+- hosts: proxmox
+  vars_files:
+    - vars/secrets.yml
+  roles:
+    - proxmox

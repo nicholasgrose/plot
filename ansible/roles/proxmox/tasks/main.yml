@@ -1,0 +1,4 @@
+- name: setup proxmox to not need subscription
+  include_tasks: no_subscription.yml
+- name: add tailscale cert update cron
+  include_tasks: tailscale_cert.yml

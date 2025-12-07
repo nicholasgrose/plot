@@ -1,0 +1,25 @@
+- name: check if proxmox no subscription repo exists
+  stat:
+    path: /etc/apt/sources.list.d/proxmox.sources
+  register: proxmox_repo
+
+- name: configure no subscription repos
+  block:
+    - name: add proxmox no subscription repo
+      copy:
+        src: "../templates/proxmox.sources"
+        dest: "/etc/apt/sources.list.d/proxmox.sources"
+        owner: root
+        group: root
+        mode: 0644
+    - name: add proxmox ceph no subscription repo
+      copy:
+        src: "../templates/ceph.sources"
+        dest: "/etc/apt/sources.list.d/ceph.sources"
+        owner: root
+        group: root
+        mode: 0644
+    - name: apt update
+      apt:
+        update_cache: yes
+  when: not proxmox_repo.stat.exists

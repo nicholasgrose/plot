@@ -1,0 +1,43 @@
+- name: check if tailscale is authenticated
+  command: tailscale status
+  register: tailscale_status
+  changed_when: false
+  failed_when: false
+
+- name: authenticate tailscale
+  block:
+    - name: get tailscale access token
+      uri:
+        url: https://api.tailscale.com/api/v2/oauth/token
+        method: POST
+        body_format: form-urlencoded
+        body:
+          client_id: "{{ tailscale_client_id }}"
+          client_secret: "{{ tailscale_client_secret }}"
+          grant_type: client_credentials
+      register: ts_access_token
+      delegate_to: localhost
+      run_once: true
+
+    - name: create auth key
+      uri:
+        url: "https://api.tailscale.com/api/v2/tailnet/{{ tailscale_tailnet }}/keys"
+        method: POST
+        body_format: json
+        headers:
+          Authorization: "Bearer {{ ts_access_token.json.access_token }}"
+        body:
+          capabilities:
+            devices:
+              create:
+                reusable: false
+                ephemeral: false
+                preauthorized: true
+                tags: [ "tag:server" ]
+          expirySeconds: 3600
+      register: ts_auth_key
+      delegate_to: localhost
+
+    - name: tailscale up
+      command: "tailscale up --authkey={{ ts_auth_key.json.key }} --hostname={{ inventory_hostname }}"
+  when: tailscale_status.rc != 0

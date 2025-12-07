@@ -1,0 +1,12 @@
+- name: check if tailscale is installed
+  stat:
+    path: /usr/bin/tailscale
+  register: tailscale_bin
+
+- name: do install
+  block:
+    - name: run install script
+      shell:
+        cmd: "curl -fsSL https://tailscale.com/install.sh | sh"
+        chdir: "/root"
+  when: not tailscale_bin.stat.exists

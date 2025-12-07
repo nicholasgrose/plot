@@ -1,0 +1,4 @@
+- name: install tailscale
+  include_tasks: install.yml
+- name: join tailnet
+  include_tasks: join.yml

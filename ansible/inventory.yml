@@ -1,0 +1,9 @@
+pi:
+  charybdis.home:
+  scylla.home:
+proxmox:
+#  aphrodite.home:
+  ares.home:
+  athena.home:
+#  hephaestus.home:
+  hera.home:
