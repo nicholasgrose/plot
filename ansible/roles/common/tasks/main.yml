@@ -1,2 +1,4 @@
 - name: configure laptop
   import_tasks: laptop.yml
+- name: upgrade packages
+  import_tasks: upgrade.yml

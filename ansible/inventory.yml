@@ -17,9 +17,9 @@ proxmox:
     athena:
       ansible_hostname: athena.home
       ansible_user: root
-#    hephaestus:
-#      ansible_hostname: hephaestus.home
-#      ansible_user: root
+    hephaestus:
+      ansible_hostname: hephaestus.home
+      ansible_user: root
     hera:
       ansible_hostname: hera.home
       ansible_user: root

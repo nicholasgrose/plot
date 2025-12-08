@@ -1,11 +1,6 @@
-- name: get kernel version
-  shell: "uname -r"
-  register: kernel_version
-  changed_when: false
-
 - name: check if proxmox
   set_fact:
-    is_proxmox: "{{ 'pve' in kernel_version.stdout }}"
+    is_proxmox: "{{ 'pve' in ansible_facts.kernel }}"
 
 - name: check if update script exists
   stat:

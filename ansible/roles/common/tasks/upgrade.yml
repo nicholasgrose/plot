@@ -1,0 +1,9 @@
+- name: upgrade all packages
+  when:
+    - ansible_facts.pkg_mgr == "apt"
+  become: true
+  apt:
+    update_cache: true
+    upgrade: safe
+    autoremove: yes
+    state: latest

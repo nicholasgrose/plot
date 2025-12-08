@@ -1,12 +1,6 @@
-- name: get chassis
-  become: true
-  shell: "hostnamectl chassis"
-  register: chassis
-  changed_when: false
-
 - name: set laptop fact
   set_fact:
-    is_laptop: "{{ chassis.stdout | trim | lower in ['laptop', 'notebook', 'convertible', 'portable'] }}"
+    is_laptop: "{{ ansible_facts.form_factor | trim | lower in ['laptop', 'notebook', 'convertible', 'portable'] }}"
 
 - name: configure laptop
   when: is_laptop

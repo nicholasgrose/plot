@@ -1,4 +1,6 @@
 - name: install ansible dependencies
+  when: ansible_facts.pkg_mgr == "apt"
+  become: true
   apt:
     name:
       - python3-proxmoxer
