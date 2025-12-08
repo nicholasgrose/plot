@@ -1,0 +1,26 @@
+- name: get chassis
+  become: true
+  shell: "hostnamectl chassis"
+  register: chassis
+  changed_when: false
+
+- name: set laptop fact
+  set_fact:
+    is_laptop: "{{ chassis.stdout | trim | lower in ['laptop', 'notebook', 'convertible', 'portable'] }}"
+
+- name: configure laptop
+  when: is_laptop
+  block:
+    - name: set laptop logind
+      template:
+        src: "laptop_logind.conf"
+        dest: "/etc/systemd/logind.conf"
+        owner: root
+        group: root
+        mode: 0644
+      register: laptop_logind
+    - name: restart logind
+      when: laptop_logind.changed
+      systemd:
+        name: systemd-logind
+        state: restarted

@@ -5,16 +5,20 @@
 
 - name: configure no subscription repos
   block:
+    - name: remove enterprise sources
+      file:
+        path: /etc/apt/sources.list.d/pve-enterprise.sources
+        state: absent
     - name: add proxmox no subscription repo
-      copy:
-        src: "../templates/proxmox.sources"
+      template:
+        src: "proxmox.sources"
         dest: "/etc/apt/sources.list.d/proxmox.sources"
         owner: root
         group: root
         mode: 0644
     - name: add proxmox ceph no subscription repo
-      copy:
-        src: "../templates/ceph.sources"
+      template:
+        src: "ceph.sources"
         dest: "/etc/apt/sources.list.d/ceph.sources"
         owner: root
         group: root

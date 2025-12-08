@@ -1,9 +1,25 @@
 pi:
-  charybdis.home:
-  scylla.home:
+  hosts:
+    charybdis:
+      ansible_hostname: charybdis.home
+      ansible_user: nicholasgr44
+    scylla:
+      ansible_hostname: scylla.home
+      ansible_user: nicholasgr44
 proxmox:
-#  aphrodite.home:
-  ares.home:
-  athena.home:
-#  hephaestus.home:
-  hera.home:
+  hosts:
+#    aphrodite:
+#      ansible_hostname: aphrodite.home
+#      ansible_user: root
+    ares:
+      ansible_hostname: ares.home
+      ansible_user: root
+    athena:
+      ansible_hostname: athena.home
+      ansible_user: root
+#    hephaestus:
+#      ansible_hostname: hephaestus.home
+#      ansible_user: root
+    hera:
+      ansible_hostname: hera.home
+      ansible_user: root

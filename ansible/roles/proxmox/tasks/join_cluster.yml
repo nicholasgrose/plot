@@ -1,0 +1,16 @@
+- name: check if cluster is already joined
+  shell: pvecm status
+  register: pvecm_status
+  changed_when: false
+  failed_when: false
+
+- name: join cluster
+  when: pvecm_status.rc != 0
+  community.proxmox.proxmox_cluster:
+    state: present
+    api_host: "{{ inventory_hostname }}"
+    api_user: "{{ proxmox_api_user }}"
+    api_password: "{{ proxmox_api_password }}"
+    master_ip: "{{ proxmox_primary_node }}"
+    fingerprint: "{{ proxmox_cluster_fingerprint }}"
+    cluster_name: "{{ proxmox_cluster_name }}"
