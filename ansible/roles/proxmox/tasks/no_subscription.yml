@@ -1,29 +1,29 @@
-- name: check if proxmox no subscription repo exists
+- name: Check if proxmox no subscription repo exists
   stat:
     path: /etc/apt/sources.list.d/proxmox.sources
   register: proxmox_repo
 
-- name: configure no subscription repos
+- name: Configure no subscription repos
   block:
-    - name: remove enterprise sources
+    - name: Remove enterprise sources
       file:
         path: /etc/apt/sources.list.d/pve-enterprise.sources
         state: absent
-    - name: add proxmox no subscription repo
+    - name: Add proxmox no subscription repo
       template:
         src: "proxmox.sources"
         dest: "/etc/apt/sources.list.d/proxmox.sources"
         owner: root
         group: root
         mode: 0644
-    - name: add proxmox ceph no subscription repo
+    - name: Add proxmox ceph no subscription repo
       template:
         src: "ceph.sources"
         dest: "/etc/apt/sources.list.d/ceph.sources"
         owner: root
         group: root
         mode: 0644
-    - name: apt update
+    - name: Apt update
       apt:
         update_cache: yes
   when: not proxmox_repo.stat.exists

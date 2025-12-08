@@ -1,8 +1,8 @@
-- name: set laptop fact
+- name: Set laptop fact
   set_fact:
-    is_laptop: "{{ ansible_facts.form_factor | trim | lower in ['laptop', 'notebook', 'convertible', 'portable'] }}"
+    common_is_laptop: "{{ ansible_facts.form_factor | trim | lower in ['laptop', 'notebook', 'convertible', 'portable'] }}"
 
-- name: configure laptop
+- name: Configure laptop
   when: is_laptop
   block:
     - name: set laptop logind

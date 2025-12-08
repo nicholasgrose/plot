@@ -1,10 +1,10 @@
-- name: check if tailscale is authenticated
+- name: Check if tailscale is authenticated
   command: tailscale status
   register: tailscale_status
   changed_when: false
   failed_when: false
 
-- name: get tailscale access token
+- name: Get tailscale access token
   become: false
   uri:
     url: https://api.tailscale.com/api/v2/oauth/token
@@ -18,10 +18,10 @@
   delegate_to: localhost
   run_once: true
 
-- name: authenticate tailscale
+- name: Authenticate tailscale
   when: tailscale_status.rc != 0
   block:
-    - name: create auth key
+    - name: Create auth key
       become: false
       uri:
         url: "https://api.tailscale.com/api/v2/tailnet/{{ tailscale_tailnet }}/keys"
@@ -41,5 +41,5 @@
       register: ts_auth_key
       delegate_to: localhost
 
-    - name: tailscale up
+    - name: Tailscale up
       command: "tailscale up --authkey={{ ts_auth_key.json.key }} --hostname={{ inventory_hostname }}"

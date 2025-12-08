@@ -1,10 +1,10 @@
-- name: check if cluster is already joined
+- name: Check if cluster is already joined
   shell: pvecm status
   register: pvecm_status
   changed_when: false
   failed_when: false
 
-- name: join cluster
+- name: Join cluster
   when: pvecm_status.rc != 0
   community.proxmox.proxmox_cluster:
     state: present

@@ -1,6 +1,6 @@
-- name: install role dependencies
+- name: Install role dependencies
   include_tasks: dependencies.yml
-- name: setup proxmox to not need subscription
+- name: Setup proxmox to not need subscription
   include_tasks: no_subscription.yml
-- name: join cluster
+- name: Join cluster
   include_tasks: join_cluster.yml

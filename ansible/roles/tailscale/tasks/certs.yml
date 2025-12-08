@@ -1,28 +1,28 @@
-- name: check if proxmox
+- name: Check if proxmox
   set_fact:
     is_proxmox: "{{ 'pve' in ansible_facts.kernel }}"
 
-- name: check if update script exists
+- name: Check if update script exists
   stat:
     path: /root/scripts/update_cert.sh
   register: cert_script
 
-- name: setup tailscale cert renewal
+- name: Setup tailscale cert renewal
   when:
     - is_proxmox
     - not cert_script.stat.exists
   block:
-    - name: install script dependencies
+    - name: Install script dependencies
       apt:
         name:
           - jq
 
-    - name: create scripts directory
+    - name: Create scripts directory
       file:
         path: "/root/scripts"
         state: directory
 
-    - name: save update script
+    - name: Save update script
       template:
         src: "update_cert.sh"
         dest: "/root/scripts/update_cert.sh"
@@ -30,7 +30,7 @@
         group: root
         mode: 0755
 
-    - name: add cron job
+    - name: Add cron job
       cron:
         name: "update tailscale cert"
         minute: "0"
@@ -38,7 +38,7 @@
         job: "/root/scripts/update_cert.sh"
         user: root
 
-    - name: run update cert script
+    - name: Run update cert script
       shell:
         cmd: "/root/scripts/update_cert.sh"
         chdir: "/root"

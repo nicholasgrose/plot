@@ -1,10 +1,12 @@
-- hosts: proxmox
+- name: Configure proxmox cluster
+  hosts: proxmox
   vars_files:
     - vars/proxmox.yml
     - vars/secrets.yml
   roles:
     - proxmox
-- hosts: all
+- name: Configure all hosts
+  hosts: all
   vars_files:
     - vars/secrets.yml
   roles:

@@ -1,4 +1,4 @@
-- name: install ansible dependencies
+- name: Install ansible dependencies
   when: ansible_facts.pkg_mgr == "apt"
   become: true
   apt:

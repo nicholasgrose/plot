@@ -1,4 +1,4 @@
-- name: upgrade all packages
+- name: Upgrade all packages
   when:
     - ansible_facts.pkg_mgr == "apt"
   become: true

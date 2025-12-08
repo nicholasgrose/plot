@@ -1,6 +1,6 @@
-- name: install tailscale
+- name: Install tailscale
   include_tasks: install.yml
-- name: join tailnet
+- name: Join tailnet
   include_tasks: join.yml
-- name: configure certificates
+- name: Configure certificates
   include_tasks: certs.yml
