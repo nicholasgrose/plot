@@ -1,10 +1,11 @@
-- name: Check if tailscale is installed
-  stat:
+- name: install | Check if tailscale is installed
+  ansible.builtin.stat:
     path: /usr/bin/tailscale
   register: tailscale_bin
 
-- name: Do install
-  shell:
+- name: install | Do install
+  changed_when: true
+  when: not tailscale_bin.stat.exists
+  ansible.builtin.command:
     cmd: "curl -fsSL https://tailscale.com/install.sh | sh"
     chdir: "/root"
-  when: not tailscale_bin.stat.exists

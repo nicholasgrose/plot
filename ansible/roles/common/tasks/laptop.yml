@@ -1,20 +1,13 @@
-- name: Set laptop fact
-  set_fact:
+- name: laptop | Set laptop fact
+  ansible.builtin.set_fact:
     common_is_laptop: "{{ ansible_facts.form_factor | trim | lower in ['laptop', 'notebook', 'convertible', 'portable'] }}"
 
-- name: Configure laptop
+- name: laptop | Configure laptop
   when: is_laptop
-  block:
-    - name: set laptop logind
-      template:
-        src: "laptop_logind.conf"
-        dest: "/etc/systemd/logind.conf"
-        owner: root
-        group: root
-        mode: 0644
-      register: laptop_logind
-    - name: restart logind
-      when: laptop_logind.changed
-      systemd:
-        name: systemd-logind
-        state: restarted
+  ansible.builtin.template:
+    src: "laptop_logind.conf"
+    dest: "/etc/systemd/logind.conf"
+    owner: root
+    group: root
+    mode: "644"
+    notify: Restart logind

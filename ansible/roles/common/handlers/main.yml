@@ -1,0 +1,4 @@
+- name: Restart logind
+  ansible.builtin.service:
+    name: logind
+    state: restarted

@@ -1,4 +1,4 @@
 - name: Configure laptop
-  import_tasks: laptop.yml
+  ansible.builtin.import_tasks: laptop.yml
 - name: Upgrade packages
-  import_tasks: upgrade.yml
+  ansible.builtin.import_tasks: upgrade.yml

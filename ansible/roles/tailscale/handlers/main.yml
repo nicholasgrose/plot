@@ -1,0 +1,5 @@
+- name: Run update cert script
+  changed_when: true
+  ansible.builtin.command:
+    cmd: "/root/scripts/update_cert.sh"
+    chdir: "/root"

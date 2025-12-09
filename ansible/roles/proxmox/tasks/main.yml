@@ -1,6 +1,6 @@
 - name: Install role dependencies
-  include_tasks: dependencies.yml
+  ansible.builtin.include_tasks: dependencies.yml
 - name: Setup proxmox to not need subscription
-  include_tasks: no_subscription.yml
+  ansible.builtin.include_tasks: no_subscription.yml
 - name: Join cluster
-  include_tasks: join_cluster.yml
+  ansible.builtin.include_tasks: join_cluster.yml

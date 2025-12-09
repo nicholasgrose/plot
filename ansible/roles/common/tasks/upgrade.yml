@@ -1,9 +1,9 @@
-- name: Upgrade all packages
+- name: upgrade | Upgrade all packages
   when:
     - ansible_facts.pkg_mgr == "apt"
   become: true
-  apt:
+  ansible.builtin.apt:
     update_cache: true
     upgrade: safe
-    autoremove: yes
-    state: latest
+    autoremove: true
+    state: present

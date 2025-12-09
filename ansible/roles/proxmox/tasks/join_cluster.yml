@@ -1,11 +1,11 @@
-- name: Check if cluster is already joined
-  shell: pvecm status
-  register: pvecm_status
+- name: join_cluster | Check if cluster is already joined
+  ansible.builtin.command: pvecm status
+  register: proxmox_pvecm_status
   changed_when: false
   failed_when: false
 
-- name: Join cluster
-  when: pvecm_status.rc != 0
+- name: "join_cluster | Join cluster"
+  when: proxmox_pvecm_status.rc != 0
   community.proxmox.proxmox_cluster:
     state: present
     api_host: "{{ inventory_hostname }}"
