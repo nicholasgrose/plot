@@ -1,6 +1,8 @@
 #!/usr/bin/env just --justfile
 
-# ansible stuff
+export ANSIBLE_VAULT_PASSWORD_FILE := "./.vault-password"
+
+#ansible stuff
 run:
     cd ansible && ansible-playbook -b run.yml
 

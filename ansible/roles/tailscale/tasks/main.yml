@@ -1,6 +1,6 @@
 - name: Install tailscale
-  include_tasks: install.yml
+  ansible.builtin.include_tasks: install.yml
 - name: Join tailnet
-  include_tasks: join.yml
+  ansible.builtin.include_tasks: join.yml
 - name: Configure certificates
-  include_tasks: certs.yml
+  ansible.builtin.include_tasks: certs.yml
