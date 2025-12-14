@@ -8,18 +8,18 @@ pi:
       ansible_user: nicholasgr44
 proxmox:
   hosts:
-#    aphrodite:
-#      ansible_hostname: aphrodite.home
-#      ansible_user: root
+    aphrodite:
+      ansible_hostname: aphrodite.home
+      ansible_user: root
     ares:
       ansible_hostname: ares.home
       ansible_user: root
     athena:
       ansible_hostname: athena.home
       ansible_user: root
-    hephaestus:
-      ansible_hostname: hephaestus.home
-      ansible_user: root
+#    hephaestus:
+#      ansible_hostname: hephaestus.home
+#      ansible_user: root
     hera:
       ansible_hostname: hera.home
       ansible_user: root

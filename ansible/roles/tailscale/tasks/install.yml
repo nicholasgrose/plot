@@ -10,10 +10,10 @@
       ansible.builtin.get_url:
         url: https://tailscale.com/install.sh
         dest: /tmp/tailscale-install.sh
-        mode: '0755'
+        mode: "755"
 
     - name: install | Execute Tailscale installation script
-      ansible.builtin.script: /tmp/tailscale-install.sh
-      args:
+      ansible.builtin.command:
+        cmd: "/tmp/tailscale-install.sh"
         chdir: /root
       changed_when: true

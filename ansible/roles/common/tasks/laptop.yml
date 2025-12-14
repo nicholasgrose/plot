@@ -3,7 +3,7 @@
     common_is_laptop: "{{ ansible_facts.form_factor | trim | lower in ['laptop', 'notebook', 'convertible', 'portable'] }}"
 
 - name: laptop | Configure laptop
-  when: is_laptop
+  when: common_is_laptop
   ansible.builtin.template:
     src: "laptop_logind.conf"
     dest: "/etc/systemd/logind.conf"
