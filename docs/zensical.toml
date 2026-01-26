@@ -2,7 +2,7 @@
 site_name = "Plot"
 site_description = "This project contains the infrastructure and server management scripts for my home lab."
 repo_url = "https://github.com/nicholasgrose/plot"
-#site_url = ""
+site_url = "https://nicholasgrose.github.io/plot/"
 site_author = "Nicholas Rose"
 copyright = "&copy; 2026 Nicholas Rose"
 docs_dir = "content"
