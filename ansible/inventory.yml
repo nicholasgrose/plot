@@ -11,9 +11,9 @@ proxmox:
     aphrodite:
       ansible_hostname: aphrodite.home
       ansible_user: root
-    ares:
-      ansible_hostname: ares.home
-      ansible_user: root
+#    ares:
+#      ansible_hostname: ares.home
+#      ansible_user: root
     athena:
       ansible_hostname: athena.home
       ansible_user: root

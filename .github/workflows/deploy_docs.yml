@@ -1,34 +1,32 @@
-name: Deploy MkDocs
+name: Documentation
 on:
   push:
     branches:
       - main
     paths:
-      - 'docs/**'
-  workflow_dispatch:
+      - "docs/**"
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
   deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
-          cache: 'pip'
-          cache-dependency-path: 'docs/requirements.txt'
-
-      - name: Install dependencies
-        working-directory: ./docs
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Deploy documentation
-        run: |
-          cd docs
-          mkdocs gh-deploy --force --clean --verbose
+          python-version: 3.x
+      - run: pip install zensical
+      - run: cd docs
+      - run: zensical build --clean
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: docs/site
+      - uses: actions/deploy-pages@v4
+        id: deployment
