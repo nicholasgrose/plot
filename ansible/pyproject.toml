@@ -1,7 +1,7 @@
 [project]
 name = "plot-ansible"
 version = "0.1.0"
-description = "The Ansible scripts of the plot proect."
+description = "The Ansible scripts of the Plot."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []

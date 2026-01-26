@@ -1,7 +1,7 @@
 [project]
 name = "plot-docs"
 version = "0.1.0"
-description = "This is the subproject for the Plot doc site."
+description = "The subproject for the Plot doc site."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
