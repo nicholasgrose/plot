@@ -8,7 +8,7 @@ dependencies = []
 
 [dependency-groups]
 dev = [
-    "ansible",
+    "ansible>=13.3.0",
     "ansible-lint>=26.1.1",
     "ansible-vault>=4.1.0",
 ]
